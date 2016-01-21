@@ -5,3 +5,40 @@
 
 Check
 =====
+
+Check adds new checkers for the [labix check.v1](https://github.com/go-check/check/tree/v1) testing library
+
+HasKey
+======
+HasKey checks if a key exists in a ```map[string]interface{}``` typed map
+
+#### example:
+```go
+obtained := map[string]interface{}{
+    "id":  1234,
+    "foo": "abc",
+    "bar": nil,
+}
+
+c.Assert(obtained, HasKey, []string{"foo", "bar"})
+```
+
+Each
+====
+Each iterates of a slice or a array and runs the embedded checker for each element
+
+#### example with the HasKey chained:
+```go
+obtained := []map[string]interface{}{
+    {
+        "id":  1234,
+        "foo": "abc",
+        "bar": nil,
+    }, {
+        "id":  5678,
+        "foo": "xyz",
+        "bar": "aaa",
+    },
+}
+c.Assert(obtained, Each(HasKey), []string{"foo", "bar"})
+```

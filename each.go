@@ -5,9 +5,6 @@ import (
 	"reflect"
 )
 
-// -----------------------------------------------------------------------
-// Each checker logic ietrator.
-
 // The Each checker loops over a slice an applies the provided checker on each element.
 //
 // For example:

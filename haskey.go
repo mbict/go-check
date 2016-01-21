@@ -10,6 +10,16 @@ type keyChecker struct {
 	*CheckerInfo
 }
 
+// The HasKey checker checks if a set of key names exists in a map.
+//
+// For example:
+//
+//     a := map[string]interface{}{
+//			"foo": 124,
+//			"bar": "test",
+//		}
+//     c.Assert(a, HasKey, []string{"foo", "bar"})
+//
 var HasKey Checker = &keyChecker{
 	&CheckerInfo{Name: "HasKey", Params: []string{"obtained", "keys"}},
 }
