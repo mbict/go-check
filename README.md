@@ -25,7 +25,8 @@ c.Assert(obtained, HasKey, []string{"foo", "bar"})
 
 Each
 ====
-Each iterates of a slice or a array and runs the embedded checker for each element
+Each iterates over a slice/array and runs the embedded checker for each record
+All record must match to get a positive check result.
 
 #### example with the HasKey chained:
 ```go
@@ -41,4 +42,15 @@ obtained := []map[string]interface{}{
     },
 }
 c.Assert(obtained, Each(HasKey), []string{"foo", "bar"})
+```
+
+Any
+====
+Any iterates over a slice/array and runs the embedded checker for each record.
+One or more records must match to get a positive match.
+
+#### example with the HasKey chained:
+```go
+obtained := []string{"bar", "foo"}
+c.Assert(obtained, Any(Equals), "foo")
 ```

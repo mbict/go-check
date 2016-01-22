@@ -14,6 +14,8 @@ var _ = Suite(&CheckerSuite{})
 func (s *CheckerSuite) TestImplements(c *C) {
 	var t Checker
 	c.Assert(HasKey, Implements, &t)
+	c.Assert(Each(nil), Implements, &t)
+	c.Assert(Any(nil), Implements, &t)
 }
 
 func checkTest(c *C, checker Checker, obtained, expected interface{}, valid bool, message string) {
@@ -46,4 +48,12 @@ func (s *CheckerSuite) TestEach(c *C) {
 	checkTest(c, Each(Equals), []string{}, "foo", true, "")
 	checkTest(c, Each(Equals), []string{"bar"}, "foo", false, "")
 	checkTest(c, Each(Equals), []string{"foo", "bar"}, "foo", false, "")
+}
+
+func (s *CheckerSuite) TestAny(c *C) {
+	checkTest(c, Any(Equals), nil, "foo", false, "input is not a slice or a array")
+	checkTest(c, Any(Equals), int64(0), "foo", false, "input is not a slice or a array")
+	checkTest(c, Any(Equals), []string{"foo", "bar"}, "foo", true, "")
+	checkTest(c, Any(Equals), []string{}, "foo", false, "")
+	checkTest(c, Any(Equals), []string{"bar", "foo"}, "stub", false, "")
 }
