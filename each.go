@@ -1,26 +1,26 @@
 package check
 
 import (
-	. "gopkg.in/check.v1"
+	checkv1 "gopkg.in/check.v1"
 	"reflect"
 )
 
-// The Each checker loops over a slice an applies the provided checker on each element.
+// Each checker loops over a slice an applies the provided checker on each element.
 //
 // For example:
 //
 //     a := []string{"a", "a"}
 //     c.Assert(a, Each(Equals), b)
 //
-func Each(checker Checker) Checker {
+func Each(checker checkv1.Checker) checkv1.Checker {
 	return &eachChecker{checker}
 }
 
 type eachChecker struct {
-	sub Checker
+	sub checkv1.Checker
 }
 
-func (checker *eachChecker) Info() *CheckerInfo {
+func (checker *eachChecker) Info() *checkv1.CheckerInfo {
 	info := *checker.sub.Info()
 	info.Name = "Each(" + info.Name + ")"
 	return &info

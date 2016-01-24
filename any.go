@@ -1,11 +1,11 @@
 package check
 
 import (
-	. "gopkg.in/check.v1"
+	checkv1 "gopkg.in/check.v1"
 	"reflect"
 )
 
-// The Any checker loops over a slice an applies the provided checker on any element.
+// Any checker loops over a slice an applies the provided checker on any element.
 // If one of the elements in the slice matches the provided checker it will succeed otherwise fail
 //
 // For example:
@@ -13,15 +13,15 @@ import (
 //     a := []string{"a", "a"}
 //     c.Assert(a, Any(Equals), b)
 //
-func Any(checker Checker) Checker {
+func Any(checker checkv1.Checker) checkv1.Checker {
 	return &anyChecker{checker}
 }
 
 type anyChecker struct {
-	sub Checker
+	sub checkv1.Checker
 }
 
-func (checker *anyChecker) Info() *CheckerInfo {
+func (checker *anyChecker) Info() *checkv1.CheckerInfo {
 	info := *checker.sub.Info()
 	info.Name = "Any(" + info.Name + ")"
 	return &info

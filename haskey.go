@@ -2,15 +2,15 @@ package check
 
 import (
 	"fmt"
-	. "gopkg.in/check.v1"
+	checkv1 "gopkg.in/check.v1"
 	"strings"
 )
 
 type keyChecker struct {
-	*CheckerInfo
+	*checkv1.CheckerInfo
 }
 
-// The HasKey checker checks if a set of key names exists in a map.
+// HasKey checker checks if a set of key names exists in a map.
 //
 // For example:
 //
@@ -20,8 +20,8 @@ type keyChecker struct {
 //		}
 //     c.Assert(a, HasKey, []string{"foo", "bar"})
 //
-var HasKey Checker = &keyChecker{
-	&CheckerInfo{Name: "HasKey", Params: []string{"obtained", "keys"}},
+var HasKey checkv1.Checker = &keyChecker{
+	&checkv1.CheckerInfo{Name: "HasKey", Params: []string{"obtained", "keys"}},
 }
 
 func (checker *keyChecker) Check(params []interface{}, names []string) (result bool, error string) {
